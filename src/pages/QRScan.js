@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import QrReader from "react-qr-reader";
 import axios from "axios";
+import {toast} from 'react-toastify';
+
 
 export default function QRScan() {
   const [data, setData] = useState("No result");
@@ -18,7 +20,7 @@ export default function QRScan() {
           rollno: rollno
         });
         console.log(response.data); // attendance marked message
-        alert("Attendance marked!");
+        toast.success("attandance marked for today")
       } catch (err) {
         console.error(err);
         alert("Error marking attendance");

@@ -23,18 +23,21 @@ import { toast } from 'react-toastify';
     const handleSubmit = async(e) => {
       e.preventDefault();
     const response = await axios.post("https://attandence-backend.vercel.app/login" ,formData);
-    localStorage.setItem("token", response.data);
+localStorage.setItem("token", response.data.token);
 
     console.log(response);
     toast.success("login succesfully");
     setIsLogin(true)
       if(response.data.userType === "admin"){
         navigate("/admin-dashboard")
-        localStorage.setItem("login", true);    
+        localStorage.setItem("login", true);   
+        localStorage.setItem("name", response.data.user.name);   // ✅ admin name store
+
+
       }else{
         navigate("/studentdashboard")
-        localStorage.setItem("name",response.data.name);
-        localStorage.setItem("rollno",response.data.rollno)
+        localStorage.setItem("name",response.data.user.name);
+        localStorage.setItem("rollno",response.data.user.rollno)
         localStorage.setItem("login", true);
       }
     };

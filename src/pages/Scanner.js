@@ -17,12 +17,7 @@ export default function Scanner() {
       <h2>Admin QR Generator</h2>
       <button
         onClick={generateQR}
-        style={{
-          padding: "10px 20px",
-          fontSize: "16px",
-          cursor: "pointer",
-          marginBottom: "20px",
-        }}
+     className="btn6"
       >
         Generate QR
       </button>

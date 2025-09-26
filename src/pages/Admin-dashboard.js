@@ -4,10 +4,17 @@ import { useNavigate } from "react-router-dom";
 
 export default function AdminDashboard() {
   const [attendanceData, setAttendanceData] = useState([]);
-  const [adminName, setAdminName] = useState("");
+  // const [dashboardData, setDashboardData] = useState([]);
+
+  // // Clear data on button click
+  // const handleClear = () => {
+  //   setDashboardData([]); // clears frontend data
+  // };
+  
+
+  const AdminName = localStorage.getItem("name");
 
   useEffect(() => {
-
     const fetchAttendance = async () => {
       try {
         const res = await axios.get("https://attandence-backend.vercel.app/attandance");
@@ -17,12 +24,18 @@ export default function AdminDashboard() {
       }
     };
 
-    fetchAttendance ();
+    fetchAttendance(); 
+
+    const interval = setInterval(fetchAttendance, 2000);
+
+    return () => clearInterval(interval); 
   }, []);
+
   const navigate = useNavigate();
-  const handleQR = ()=>{
-    navigate("/scanner")
-  }
+  const handleQR = () => {
+    navigate("/scanner");
+  };
+
   return (
     <div className="dashboard-container">
       {/* Internal CSS */}
@@ -99,9 +112,8 @@ export default function AdminDashboard() {
 
       {/* Header */}
       <header className="dashboard-header">
-        <h2>Welcome Admin</h2>
-        <h3>{adminName}</h3>
-        <button onClick={handleQR}>Generate QR</button>
+        <h2>Welcome {AdminName || "Admin"}</h2>
+        <button onClick={handleQR} className="btn6">Generate QR</button>
       </header>
 
       {/* Main Content */}
@@ -128,13 +140,14 @@ export default function AdminDashboard() {
                   <tr key={att._id}>
                     <td>{att.name}</td>
                     <td>{att.rollno}</td>
-                    <td>{new Date(att.timestamp).toLocaleString()}</td>
+                    <td>{new Date(att.createdAt).toLocaleString()}</td>
                   </tr>
                 ))
               )}
             </tbody>
           </table>
         </div>
+
 
         {/* Right: Charts Placeholder */}
         <div className="charts-container">

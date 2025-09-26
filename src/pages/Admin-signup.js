@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function Adminsignup() {
+
   const navigate = useNavigate();
   const [admin, setAdmin] = useState({
     name: "",
@@ -17,15 +18,22 @@ export default function Adminsignup() {
     let { name, value } = e.target;
     setAdmin({ ...admin, [name]: value });
   };
-
-  const handleSubmit =  async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post("https://attandence-backend.vercel.app/adminregister", admin);
-    alert("admin regsiter succesfully")
-    navigate("/login")
-
-    console.log("Admin Signup Data:", response);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/adminregister",
+        admin,
+      );
+      alert("Admin registered successfully");
+      navigate("/login");
+      console.log("Admin Signup Data:", response.data);
+    } catch (error) {
+      console.error("Admin Signup error:", error.response?.data || error.message);
+      alert("Error: " + (error.response?.data?.msg || error.message));
+    }
   };
+  
 
   return (
     <div className="signup-container">
@@ -68,6 +76,7 @@ export default function Adminsignup() {
           />
 
           <button type="submit">Signup</button>
+          
         </form>
       </div>
     </div>
