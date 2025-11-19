@@ -28,6 +28,17 @@ export default function StudentDashboard() {
     navigate("/QRscan");
   };
 
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
+
+
   return (
     <div style={{ display: "flex", padding: "20px", gap: "20px" }}>
       {/* Left side */}
@@ -61,7 +72,7 @@ export default function StudentDashboard() {
               attendanceData.map((record, index) => (
                 <tr key={index}>
                   <td style={{ border: "1px solid #ccc", padding: "8px" }}>
-                    {record.date || record.timestamp || "-"}
+                    {record.date || formatDate(record.createdAt) || "-"}
                   </td>
                   <td
                     style={{
@@ -70,7 +81,7 @@ export default function StudentDashboard() {
                       color: record.status === "Present" ? "green" : "red",
                     }}
                   >
-                    {record.status || "Present"}
+                    {record.status ? "Present" : "Absent"}
                   </td>
                 </tr>
               ))
