@@ -26,7 +26,7 @@ export default function Adminsignup() {
         admin,
       );
       alert("Admin registered successfully");
-      navigate("/login");
+      navigate("/StudentLogin");
       console.log("Admin Signup Data:", response.data);
     } catch (error) {
       console.error("Admin Signup error:", error.response?.data || error.message);

@@ -40,7 +40,7 @@ export default function QRScan() {
           delay={300}
           onError={handleError}
           onScan={handleScan}
-          facingMode="user"
+          facingMode="environment" // 👈 BACK CAMERA
           style={{ width: "100%" }}
         />
       </div>
