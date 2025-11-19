@@ -22,7 +22,7 @@
 
       const handleSubmit = async(e) => {
         e.preventDefault();
-      const response = await axios.post("http://localhost:5000/login" ,formData);
+      const response = await axios.post("https://attandence-backend.vercel.app/login" ,formData);
   localStorage.setItem("token", response.data.token);
 
       console.log(response.data);

@@ -22,7 +22,7 @@ export default function Adminsignup() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/adminregister",
+        "https://attandence-backend.vercel.app/adminregister",
         admin,
       );
       alert("Admin registered successfully");

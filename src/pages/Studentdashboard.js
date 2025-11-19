@@ -13,7 +13,7 @@ export default function StudentDashboard() {
     if (!rollno) return; // agar rollno missing ho to kuch na kare
     const fetchAttendance = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/attendance/${rollno}`);
+        const res = await axios.get(`https://attandence-backend.vercel.app/attendance/${rollno}`);
         setAttendanceData(res.data || []);
       } catch (err) {
         console.error("Error fetching attendance:", err);
